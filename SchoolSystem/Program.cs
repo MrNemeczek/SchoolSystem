@@ -1,7 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using SchoolSystem.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Add configuration
+IConfiguration configuration = builder.Configuration;
+
+builder.Services.AddDbContext<school_systemContext>(options =>
+{
+    options.UseMySQL(configuration.GetConnectionString("LocalConnection"));
+});
 
 var app = builder.Build();
 

@@ -1,12 +1,11 @@
 ﻿@model SchoolSystem.Models.Student
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edycja studenta";
 }
 
-<h1>Edit</h1>
+<h1>Edycja Studenta</h1>
 
-<h4>Student</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,12 +24,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Birthdate" class="control-label"></label>
-                <input asp-for="Birthdate" class="form-control" />
+                <input asp-for="Birthdate" class="form-control" type="date"/>
                 <span asp-validation-for="Birthdate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AdmissionDate" class="control-label"></label>
-                <input asp-for="AdmissionDate" class="form-control" />
+                <input asp-for="AdmissionDate" class="form-control" type="date"/>
                 <span asp-validation-for="AdmissionDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,19 +37,10 @@
                 <select asp-for="IdClass" class="form-control" asp-items="ViewBag.IdClass"></select>
                 <span asp-validation-for="IdClass" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Active" class="control-label"></label>
-                <input asp-for="Active" class="form-control" />
-                <span asp-validation-for="Active" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group mt-2">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger">Anuluj</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

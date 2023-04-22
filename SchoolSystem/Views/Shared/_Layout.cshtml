@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="~/SchoolSystem.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <div class="header">
+        <ul class="headernav">
+            <li>
+                <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Index">Zaloguj</a>
+            </li>
+        </ul>
+    </div>
 
     <div class="page">
         <div class="sidebar">
@@ -17,10 +24,16 @@
                     <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    <a class="nav-link text-white" asp-area="" asp-controller="Students" asp-action="Index">Studenci</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="" asp-controller="Students" asp-action="Index">Studenci</a>
+                    <a class="nav-link text-white" asp-area="" asp-controller="Teachers" asp-action="Index">Nauczyciele</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Subjects" asp-action="Index">Przedmioty</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Classes" asp-action="Index">Klasy</a>
                 </li>
             </ul>
         </div>

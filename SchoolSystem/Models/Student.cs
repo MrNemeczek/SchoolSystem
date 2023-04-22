@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolSystem.Models
 {
@@ -12,9 +14,15 @@ namespace SchoolSystem.Models
         }
 
         public int Id { get; set; }
+        [DisplayName("Imię")]
         public string Name { get; set; } = null!;
+        [DisplayName("Nazwisko")]
         public string Lastname { get; set; } = null!;
+        [DisplayName("Data urodzenia")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime Birthdate { get; set; }
+        [DisplayName("Data przyjęcia")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime AdmissionDate { get; set; }
         public int? IdClass { get; set; }
         /// <summary>

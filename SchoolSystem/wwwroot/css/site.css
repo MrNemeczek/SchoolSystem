@@ -16,3 +16,25 @@ html {
 body {
     margin-bottom: 60px;
 }
+
+/*moja tabela*/
+.mytable {
+    color: #fdfcff;
+    width: 100%;
+}
+    .mytable thead {
+        background-color: #1e1e1e;
+    }
+    .mytable tbody tr:nth-child(even):hover {
+        background-color: #262626
+    }
+    .mytable tbody tr:nth-child(odd):hover {
+        background-color: #262626
+    }
+    .mytable tbody tr:nth-child(even) {
+        background-color: #404040
+    }
+    .mytable tbody tr:nth-child(odd) {
+        background-color: #333333;
+    }
+/*koniec moja tablica*/

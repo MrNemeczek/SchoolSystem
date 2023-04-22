@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SchoolSystem.Models
 {
@@ -11,7 +12,9 @@ namespace SchoolSystem.Models
         }
 
         public int Id { get; set; }
+        [DisplayName("Nazwa klasy")]
         public string Name { get; set; } = null!;
+        [DisplayName("Wychowawca")]
         public int? IdTeacher { get; set; }
 
         public virtual Teacher? IdTeacherNavigation { get; set; }

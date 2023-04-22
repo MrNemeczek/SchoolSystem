@@ -1,4 +1,18 @@
-﻿.mynavbar{
+﻿.header {
+    background-color: #1a1a1a;
+    height: 50px;
+    font-size: 20px;
+    text-align: right;
+}
+.headernav ul{
+    
+}
+.headernav li{
+    list-style: none;
+    margin-right: 10px;
+}
+
+.mynavbar{
     list-style: none;
 }
 
@@ -6,7 +20,7 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    background: #2c2b30;
+    background: #4d4d4d;
     color: #fdfcff;
 }
 
@@ -62,7 +76,7 @@ button.accept-policy {
 }
 
 .sidebar {
-    background: #28272c;
+    background: #262626;
     width: 250px;
     min-height: 100vh;
     height: 100%;

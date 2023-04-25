@@ -21,19 +21,19 @@ namespace SchoolSystem.Controllers
         // GET: Notices
         public async Task<IActionResult> Index()
         {
-            var school_systemContext = _context.Notices.Include(n => n.IdStudentNavigation).Include(n => n.IdTeacherNavigation);
+            var school_systemContext = _context.Notice.Include(n => n.IdStudentNavigation).Include(n => n.IdTeacherNavigation);
             return View(await school_systemContext.ToListAsync());
         }
 
         // GET: Notices/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Notices == null)
+            if (id == null || _context.Notice == null)
             {
                 return NotFound();
             }
 
-            var notice = await _context.Notices
+            var notice = await _context.Notice
                 .Include(n => n.IdStudentNavigation)
                 .Include(n => n.IdTeacherNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -48,8 +48,8 @@ namespace SchoolSystem.Controllers
         // GET: Notices/Create
         public IActionResult Create()
         {
-            ViewData["IdStudent"] = new SelectList(_context.Students, "Id", "Id");
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id");
+            ViewData["IdStudent"] = new SelectList(_context.Student, "Id", "Id");
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id");
             return View();
         }
 
@@ -66,26 +66,26 @@ namespace SchoolSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdStudent"] = new SelectList(_context.Students, "Id", "Id", notice.IdStudent);
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", notice.IdTeacher);
+            ViewData["IdStudent"] = new SelectList(_context.Student, "Id", "Id", notice.IdStudent);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", notice.IdTeacher);
             return View(notice);
         }
 
         // GET: Notices/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Notices == null)
+            if (id == null || _context.Notice == null)
             {
                 return NotFound();
             }
 
-            var notice = await _context.Notices.FindAsync(id);
+            var notice = await _context.Notice.FindAsync(id);
             if (notice == null)
             {
                 return NotFound();
             }
-            ViewData["IdStudent"] = new SelectList(_context.Students, "Id", "Id", notice.IdStudent);
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", notice.IdTeacher);
+            ViewData["IdStudent"] = new SelectList(_context.Student, "Id", "Id", notice.IdStudent);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", notice.IdTeacher);
             return View(notice);
         }
 
@@ -121,20 +121,20 @@ namespace SchoolSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdStudent"] = new SelectList(_context.Students, "Id", "Id", notice.IdStudent);
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", notice.IdTeacher);
+            ViewData["IdStudent"] = new SelectList(_context.Student, "Id", "Id", notice.IdStudent);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", notice.IdTeacher);
             return View(notice);
         }
 
         // GET: Notices/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Notices == null)
+            if (id == null || _context.Notice == null)
             {
                 return NotFound();
             }
 
-            var notice = await _context.Notices
+            var notice = await _context.Notice
                 .Include(n => n.IdStudentNavigation)
                 .Include(n => n.IdTeacherNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -151,14 +151,14 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Notices == null)
+            if (_context.Notice == null)
             {
                 return Problem("Entity set 'school_systemContext.Notices'  is null.");
             }
-            var notice = await _context.Notices.FindAsync(id);
+            var notice = await _context.Notice.FindAsync(id);
             if (notice != null)
             {
-                _context.Notices.Remove(notice);
+                _context.Notice.Remove(notice);
             }
             
             await _context.SaveChangesAsync();
@@ -167,7 +167,7 @@ namespace SchoolSystem.Controllers
 
         private bool NoticeExists(int id)
         {
-          return (_context.Notices?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Notice?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -21,19 +21,19 @@ namespace SchoolSystem.Controllers
         // GET: Subjects
         public async Task<IActionResult> Index()
         {
-            var school_systemContext = _context.Subjects.Include(s => s.IdTeacherNavigation);
+            var school_systemContext = _context.Subject.Include(s => s.IdTeacherNavigation);
             return View(await school_systemContext.ToListAsync());
         }
 
         // GET: Subjects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Subjects == null)
+            if (id == null || _context.Subject == null)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects
+            var subject = await _context.Subject
                 .Include(s => s.IdTeacherNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (subject == null)
@@ -47,7 +47,7 @@ namespace SchoolSystem.Controllers
         // GET: Subjects/Create
         public IActionResult Create()
         {
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id");
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id");
             return View();
         }
 
@@ -64,24 +64,24 @@ namespace SchoolSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", subject.IdTeacher);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", subject.IdTeacher);
             return View(subject);
         }
 
         // GET: Subjects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Subjects == null)
+            if (id == null || _context.Subject == null)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects.FindAsync(id);
+            var subject = await _context.Subject.FindAsync(id);
             if (subject == null)
             {
                 return NotFound();
             }
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", subject.IdTeacher);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", subject.IdTeacher);
             return View(subject);
         }
 
@@ -117,19 +117,19 @@ namespace SchoolSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", subject.IdTeacher);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", subject.IdTeacher);
             return View(subject);
         }
 
         // GET: Subjects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Subjects == null)
+            if (id == null || _context.Subject == null)
             {
                 return NotFound();
             }
 
-            var subject = await _context.Subjects
+            var subject = await _context.Subject
                 .Include(s => s.IdTeacherNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (subject == null)
@@ -145,14 +145,14 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Subjects == null)
+            if (_context.Subject == null)
             {
                 return Problem("Entity set 'school_systemContext.Subjects'  is null.");
             }
-            var subject = await _context.Subjects.FindAsync(id);
+            var subject = await _context.Subject.FindAsync(id);
             if (subject != null)
             {
-                _context.Subjects.Remove(subject);
+                _context.Subject.Remove(subject);
             }
             
             await _context.SaveChangesAsync();
@@ -161,7 +161,7 @@ namespace SchoolSystem.Controllers
 
         private bool SubjectExists(int id)
         {
-          return (_context.Subjects?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Subject?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

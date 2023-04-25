@@ -21,19 +21,19 @@ namespace SchoolSystem.Controllers
         // GET: Classes
         public async Task<IActionResult> Index()
         {
-            var school_systemContext = _context.Classes.Include(c => c.IdTeacherNavigation);
+            var school_systemContext = _context.Class.Include(c => c.IdTeacherNavigation);
             return View(await school_systemContext.ToListAsync());
         }
 
         // GET: Classes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Classes == null)
+            if (id == null || _context.Class == null)
             {
                 return NotFound();
             }
 
-            var @class = await _context.Classes
+            var @class = await _context.Class
                 .Include(c => c.IdTeacherNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@class == null)
@@ -47,7 +47,7 @@ namespace SchoolSystem.Controllers
         // GET: Classes/Create
         public IActionResult Create()
         {
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id");
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id");
             return View();
         }
 
@@ -64,24 +64,24 @@ namespace SchoolSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", @class.IdTeacher);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", @class.IdTeacher);
             return View(@class);
         }
 
         // GET: Classes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Classes == null)
+            if (id == null || _context.Class == null)
             {
                 return NotFound();
             }
 
-            var @class = await _context.Classes.FindAsync(id);
+            var @class = await _context.Class.FindAsync(id);
             if (@class == null)
             {
                 return NotFound();
             }
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", @class.IdTeacher);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", @class.IdTeacher);
             return View(@class);
         }
 
@@ -117,19 +117,19 @@ namespace SchoolSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", @class.IdTeacher);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", @class.IdTeacher);
             return View(@class);
         }
 
         // GET: Classes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Classes == null)
+            if (id == null || _context.Class == null)
             {
                 return NotFound();
             }
 
-            var @class = await _context.Classes
+            var @class = await _context.Class
                 .Include(c => c.IdTeacherNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@class == null)
@@ -145,14 +145,14 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Classes == null)
+            if (_context.Class == null)
             {
                 return Problem("Entity set 'school_systemContext.Classes'  is null.");
             }
-            var @class = await _context.Classes.FindAsync(id);
+            var @class = await _context.Class.FindAsync(id);
             if (@class != null)
             {
-                _context.Classes.Remove(@class);
+                _context.Class.Remove(@class);
             }
             
             await _context.SaveChangesAsync();
@@ -161,7 +161,7 @@ namespace SchoolSystem.Controllers
 
         private bool ClassExists(int id)
         {
-          return (_context.Classes?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Class?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

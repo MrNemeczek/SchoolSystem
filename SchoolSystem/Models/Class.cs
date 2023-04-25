@@ -8,7 +8,8 @@ namespace SchoolSystem.Models
     {
         public Class()
         {
-            Students = new HashSet<Student>();
+            Classes = new HashSet<Classes>();
+            StudentClasses = new HashSet<StudentClass>();
         }
 
         public int Id { get; set; }
@@ -18,6 +19,7 @@ namespace SchoolSystem.Models
         public int? IdTeacher { get; set; }
 
         public virtual Teacher? IdTeacherNavigation { get; set; }
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Classes> Classes { get; set; }
+        public virtual ICollection<StudentClass> StudentClasses { get; set; }
     }
 }

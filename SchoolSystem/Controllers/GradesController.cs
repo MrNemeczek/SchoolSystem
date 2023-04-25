@@ -21,19 +21,19 @@ namespace SchoolSystem.Controllers
         // GET: Grades
         public async Task<IActionResult> Index()
         {
-            var school_systemContext = _context.Grades.Include(g => g.IdStudentNavigation).Include(g => g.IdSubjectNavigation).Include(g => g.IdTeacherNavigation);
+            var school_systemContext = _context.Grade.Include(g => g.IdStudentNavigation).Include(g => g.IdSubjectNavigation).Include(g => g.IdTeacherNavigation);
             return View(await school_systemContext.ToListAsync());
         }
 
         // GET: Grades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Grades == null)
+            if (id == null || _context.Grade == null)
             {
                 return NotFound();
             }
 
-            var grade = await _context.Grades
+            var grade = await _context.Grade
                 .Include(g => g.IdStudentNavigation)
                 .Include(g => g.IdSubjectNavigation)
                 .Include(g => g.IdTeacherNavigation)
@@ -49,9 +49,9 @@ namespace SchoolSystem.Controllers
         // GET: Grades/Create
         public IActionResult Create()
         {
-            ViewData["IdStudent"] = new SelectList(_context.Students, "Id", "Id");
-            ViewData["IdSubject"] = new SelectList(_context.Subjects, "Id", "Id");
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id");
+            ViewData["IdStudent"] = new SelectList(_context.Student, "Id", "Id");
+            ViewData["IdSubject"] = new SelectList(_context.Subject, "Id", "Id");
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id");
             return View();
         }
 
@@ -68,28 +68,28 @@ namespace SchoolSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdStudent"] = new SelectList(_context.Students, "Id", "Id", grade.IdStudent);
-            ViewData["IdSubject"] = new SelectList(_context.Subjects, "Id", "Id", grade.IdSubject);
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", grade.IdTeacher);
+            ViewData["IdStudent"] = new SelectList(_context.Student, "Id", "Id", grade.IdStudent);
+            ViewData["IdSubject"] = new SelectList(_context.Subject, "Id", "Id", grade.IdSubject);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", grade.IdTeacher);
             return View(grade);
         }
 
         // GET: Grades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Grades == null)
+            if (id == null || _context.Grade == null)
             {
                 return NotFound();
             }
 
-            var grade = await _context.Grades.FindAsync(id);
+            var grade = await _context.Grade.FindAsync(id);
             if (grade == null)
             {
                 return NotFound();
             }
-            ViewData["IdStudent"] = new SelectList(_context.Students, "Id", "Id", grade.IdStudent);
-            ViewData["IdSubject"] = new SelectList(_context.Subjects, "Id", "Id", grade.IdSubject);
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", grade.IdTeacher);
+            ViewData["IdStudent"] = new SelectList(_context.Student, "Id", "Id", grade.IdStudent);
+            ViewData["IdSubject"] = new SelectList(_context.Subject, "Id", "Id", grade.IdSubject);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", grade.IdTeacher);
             return View(grade);
         }
 
@@ -125,21 +125,21 @@ namespace SchoolSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdStudent"] = new SelectList(_context.Students, "Id", "Id", grade.IdStudent);
-            ViewData["IdSubject"] = new SelectList(_context.Subjects, "Id", "Id", grade.IdSubject);
-            ViewData["IdTeacher"] = new SelectList(_context.Teachers, "Id", "Id", grade.IdTeacher);
+            ViewData["IdStudent"] = new SelectList(_context.Student, "Id", "Id", grade.IdStudent);
+            ViewData["IdSubject"] = new SelectList(_context.Subject, "Id", "Id", grade.IdSubject);
+            ViewData["IdTeacher"] = new SelectList(_context.Teacher, "Id", "Id", grade.IdTeacher);
             return View(grade);
         }
 
         // GET: Grades/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Grades == null)
+            if (id == null || _context.Grade == null)
             {
                 return NotFound();
             }
 
-            var grade = await _context.Grades
+            var grade = await _context.Grade
                 .Include(g => g.IdStudentNavigation)
                 .Include(g => g.IdSubjectNavigation)
                 .Include(g => g.IdTeacherNavigation)
@@ -157,14 +157,14 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Grades == null)
+            if (_context.Grade == null)
             {
                 return Problem("Entity set 'school_systemContext.Grades'  is null.");
             }
-            var grade = await _context.Grades.FindAsync(id);
+            var grade = await _context.Grade.FindAsync(id);
             if (grade != null)
             {
-                _context.Grades.Remove(grade);
+                _context.Grade.Remove(grade);
             }
             
             await _context.SaveChangesAsync();
@@ -173,7 +173,7 @@ namespace SchoolSystem.Controllers
 
         private bool GradeExists(int id)
         {
-          return (_context.Grades?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Grade?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
